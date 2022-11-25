@@ -5,8 +5,8 @@ import math
 
 w = 1000
 h = 560
-xPosition = 10
-yPosition = 10
+xmonster = 10
+ymonster = 10
 xScale = 3
 yScale = 3 
 
@@ -51,7 +51,7 @@ def tembok():
 
 
 def monster():
-    glTranslated(xPosition, yPosition, 0)
+    glTranslated(xmonster, ymonster, 0)
     glScaled(xScale,yScale,0)
 
     # Kepala--------------------
@@ -144,21 +144,30 @@ def monster():
     glEnd()
 
 def mySpecialKeyboard(key, x, y):
-    global xPosition
-    global yPosition
+    global xmonster
+    global ymonster
     global xScale
     global yScale
     if key == GLUT_KEY_LEFT:
-        xPosition -= 10
-    elif key == GLUT_KEY_RIGHT:
-        xPosition += 10
-    elif key == GLUT_KEY_UP:
-        yPosition += 10
-    elif key == GLUT_KEY_DOWN:
-        if yPosition >= 10:
-            yPosition -= 10
+        if xmonster > 10:
+            xmonster -= 10
         else:
-            yPosition -= 0
+            xmonster =- 0
+    elif key == GLUT_KEY_RIGHT:
+        if xmonster < 910:
+            xmonster += 10
+        else:
+            xmonster +- 0
+    elif key == GLUT_KEY_UP:
+        if ymonster < 480:
+            ymonster += 10
+        else:
+            ymonster += 0
+    elif key == GLUT_KEY_DOWN:
+        if ymonster > 10:
+            ymonster -= 10
+        else:
+            ymonster -= 0
 
 def iterate():
     glViewport(0, 0, w, h)
