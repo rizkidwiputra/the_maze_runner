@@ -15,7 +15,7 @@ def transformation():
     glEnd()
 
 def tembok():
-    glLineWidth(70)
+    glLineWidth(70) 
     glBegin(GL_LINES)
     glColor3d(0, 0, 256)
     glVertex2f(0, 0)
