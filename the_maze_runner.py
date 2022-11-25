@@ -3,6 +3,8 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import math
 
+w = 1000
+h = 560
 xPosition = 10
 yPosition = 10
 xScale = 3
@@ -15,33 +17,38 @@ def transformation():
     glEnd()
 
 def tembok():
-    glLineWidth(70) 
-    glBegin(GL_LINES)
+    glBegin(GL_POLYGON)
     glColor3d(0, 0, 256)
     glVertex2f(0, 0)
     glVertex2f(0, 560)
+    glVertex2f(30, 560)
+    glVertex2f(30, 0)
     glEnd()
 
-    glLineWidth(70)
-    glBegin(GL_LINES)
+    glBegin(GL_POLYGON)
     glColor3d(0, 0, 256)
     glVertex2f(0, 560)
     glVertex2f(1000, 560)
+    glVertex2f(1000, 530)
+    glVertex2f(0, 530)
     glEnd()
 
-    glLineWidth(70)
-    glBegin(GL_LINES)
+    glBegin(GL_POLYGON)
     glColor3d(0, 0, 256)
     glVertex2f(1000, 560)
     glVertex2f(1000, 0)
+    glVertex2f(970, 0)
+    glVertex2f(970, 560)
     glEnd()
 
-    glLineWidth(70)
-    glBegin(GL_LINES)
+    glBegin(GL_POLYGON)
     glColor3d(0, 0, 256)
     glVertex2f(1000, 0)
     glVertex2f(0, 0)
+    glVertex2f(0, 30)
+    glVertex2f(1000, 30)
     glEnd()
+
 
 def monster():
     glTranslated(xPosition, yPosition, 0)
@@ -154,10 +161,10 @@ def mySpecialKeyboard(key, x, y):
             yPosition -= 0
 
 def iterate():
-    glViewport(0, 0, 1000, 560)
+    glViewport(0, 0, w, h)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, 1000, 0.0, 560, 0.0, 1.0)
+    glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
@@ -173,7 +180,7 @@ def showScreen():
 
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(1000, 560)
+glutInitWindowSize(w, h)
 glutInitWindowPosition(0, 0)
 glutCreateWindow("OpenGL Coding Practice")
 glutDisplayFunc(showScreen)

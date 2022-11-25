@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from OpenGL.GL import *
 import os
-del os.environ['DISPLAY']
+# del os.environ['DISPLAY']
 
 
 w, h = 1000, 800
