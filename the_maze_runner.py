@@ -5,16 +5,19 @@ import math
 
 w = 1000
 h = 560
-xmonster = 10
-ymonster = 10
-xScale = 3
-yScale = 3 
+xmonster1 = 10
+ymonster1 = 10
+xmonster2 = 100
+ymonster2 = 100
+xScale1 = 3
+yScale1 = 3 
 
 def transformation():
-    glScale(4, 4, 0)
-    glTranslate(10, 10, 0)
     glBegin(GL_POLYGON)
+    glScale(3, 3, 0)
+    glTranslate(10, 10, 0)
     glEnd()
+
 
 def tembok():
     glBegin(GL_POLYGON)
@@ -50,9 +53,11 @@ def tembok():
     glEnd()
 
 
-def monster():
-    glTranslated(xmonster, ymonster, 0)
-    glScaled(xScale,yScale,0)
+def monster1():
+    global xmonster1
+    global ymonster1
+    glTranslated(xmonster1, ymonster1, 0)
+    glScaled(xScale1,yScale1,0)
 
     # Kepala--------------------
     glBegin(GL_POLYGON)
@@ -143,31 +148,53 @@ def monster():
     glVertex2f(16.5, 7.5)
     glEnd()
 
-def mySpecialKeyboard(key, x, y):
-    global xmonster
-    global ymonster
-    global xScale
-    global yScale
+
+def monster2():
+    glBegin(GL_POLYGON)
+    glColor3d(255,0,0)
+    glVertex2d(30, 30)
+    glVertex2d(30, 70)
+    glVertex2d(70, 70)
+    glVertex2d(70, 30)
+    glEnd()
+
+
+
+def mySpecialKeyboard1(key, x, y):
+    global xmonster1
+    global ymonster1
     if key == GLUT_KEY_LEFT:
-        if xmonster > 10:
-            xmonster -= 10
+        if xmonster1 > 10:
+            xmonster1 -= 10
         else:
-            xmonster =- 0
+            xmonster1 =- 0
     elif key == GLUT_KEY_RIGHT:
-        if xmonster < 910:
-            xmonster += 10
+        if xmonster1 < 910:
+            xmonster1 += 10
         else:
-            xmonster +- 0
+            xmonster1 +- 0
     elif key == GLUT_KEY_UP:
-        if ymonster < 480:
-            ymonster += 10
+        if ymonster1 < 480:
+            ymonster1 += 10
         else:
-            ymonster += 0
+            ymonster1 += 0
     elif key == GLUT_KEY_DOWN:
-        if ymonster > 10:
-            ymonster -= 10
+        if ymonster1 > 10:
+            ymonster1 -= 10
         else:
-            ymonster -= 0
+            ymonster1 -= 0
+
+def myMouse(button, state, xmouse, ymouse):
+    global xmonster2, ymonster2
+    if button == GLUT_LEFT_BUTTON & state == GLUT_DOWN:
+        xmonster2 = xmouse - w/2
+        xmonster2 = h/2 - ymouse
+        # print(pos_x_box)
+        # print(xmouse)
+        # print(pos_y_box)
+        # print(ymouse)
+
+
 
 def iterate():
     glViewport(0, 0, w, h)
@@ -183,8 +210,8 @@ def showScreen():
     glLoadIdentity()
     iterate()
     tembok()
-    # transformation()
-    monster()
+    monster1()
+    monster2()
     glutSwapBuffers()
 
 glutInit()
@@ -194,5 +221,6 @@ glutInitWindowPosition(0, 0)
 glutCreateWindow("OpenGL Coding Practice")
 glutDisplayFunc(showScreen)
 glutIdleFunc(showScreen)
-glutSpecialFunc(mySpecialKeyboard)
+glutSpecialFunc(mySpecialKeyboard1)
+glutMouseFunc(myMouse)
 glutMainLoop()
