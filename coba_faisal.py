@@ -89,16 +89,15 @@ def arrow():
 
 
 def box():
-    if collision == False:
-        glPushMatrix()
-        glTranslated(pos_x_box, pos_y_box, 0)
-        glBegin(GL_POLYGON)
-        glVertex2f(-100, 100)
-        glVertex2f(100, 100)
-        glVertex2f(100, -100)
-        glVertex2f(-100, -100)
-        glEnd()
-        glPopMatrix()
+    glPushMatrix()
+    glTranslated(pos_x_box, pos_y_box, 0)
+    glBegin(GL_POLYGON)
+    glVertex2f(-100, 100)
+    glVertex2f(100, 100)
+    glVertex2f(100, -100)
+    glVertex2f(-100, -100)
+    glEnd()
+    glPopMatrix()
 
 def background():
     glScaled(100, 100, 1)
@@ -153,7 +152,7 @@ def showScreen():
     glColor3f(1.0, 0.0, 3.0)
     if collision == False:
         arrow()
-        box()
+    box()
     # meteor()
     glutSwapBuffers()
 
