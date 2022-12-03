@@ -3,87 +3,159 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import math
 
-w = 1000
-h = 550
 xmainchar, ymainchar = 50, 60
 xmonster1, ymonster1 = 555, 440
-arah_monster = False
+xmonster2, ymonster2 = 635, 440
+xmonster3, ymonster3 = 715, 440
+xdiamond, ydiamond = 940, 440
+arah_monster1 = False
+arah_monster2 = False
+arah_monster3 = False
 coll = False
 
-def gerak():
-    global ymonster1, xmonster1, arah_monster
+def gerak1():
+    global ymonster1, xmonster1, arah_monster1
 
-    if ymonster1 <= 460 and arah_monster == False:
+    if ymonster1 <= 460 and arah_monster1 == False:
         ymonster1 -= 2.5
-        if ymonster1 <= 60:
-            arah_monster =True
-    if ymonster1 >= 60 and arah_monster == True:
+        if ymonster1 <= 70:
+            arah_monster1 =True
+    if ymonster1 >= 70 and arah_monster1 == True:
         ymonster1 += 2.5
         if ymonster1 >= 460:
-            arah_monster = False
+            arah_monster1 = False
 
-xkotak, ykotak = 60, 350
-xKondisi, yKondisi = False, False
-def kotak():
-    global xkotak, ykotak, xKondisi, yKondisi
+
+def gerak2():
+    global ymonster2, xmonster2, arah_monster2
+
+    if ymonster2 <= 460 and arah_monster2 == False:
+        ymonster2 -= 10
+        if ymonster2 <= 70:
+            arah_monster2 =True
+    if ymonster2 >= 70 and arah_monster2 == True:
+        ymonster2 += 10
+        if ymonster2 >= 460:
+            arah_monster2 = False
+
+
+def gerak3():
+    global ymonster3, xmonster3, arah_monster3
+
+    if ymonster3 <= 460 and arah_monster3 == False:
+        ymonster3 -= 5
+        if ymonster3 <= 70:
+            arah_monster3 =True
+    if ymonster3 >= 70 and arah_monster3 == True:
+        ymonster3 += 5
+        if ymonster3 >= 460:
+            arah_monster3 = False
+
+
+xkotak1, ykotak1 = 60, 350
+xKondisi1, yKondisi1 = False, False
+def kotak1(cx, cy, r, sisi):
+    global xkotak1, ykotak1, xKondisi1, yKondisi1
     glPushMatrix()
-    if xkotak >= 40 and xKondisi == False:
-        xkotak += 1
-        if xkotak >= 970:
-            xKondisi = True
+    if xkotak1 >= 40 and xKondisi1 == False:
+        xkotak1 += 2.5
+        if xkotak1 >= 960:
+            xKondisi1 = True
     
-    if xkotak <= 970 and xKondisi == True:
-        xkotak -= 1
-        if xkotak <= 40:
-            xKondisi = False
+    if xkotak1 <= 960 and xKondisi1 == True:
+        xkotak1 -= 2.5
+        if xkotak1 <= 40:
+            xKondisi1 = False
 
-    if ykotak >= 30 and yKondisi == False:
-        ykotak += 2.5
-        if ykotak >= 460:
-            yKondisi = True
+    if ykotak1 >= 40 and yKondisi1 == False:
+        ykotak1 += 2
+        if ykotak1 >= 460:
+            yKondisi1 = True
     
-    if ykotak <= 460 and yKondisi == True:
-        ykotak -= 2.5
-        if ykotak <= 30:
-            yKondisi = False
-    glTranslated(xkotak, ykotak, 0)
-    glPointSize(10)
-    glBegin(GL_POINTS)
+    if ykotak1 <= 460 and yKondisi1 == True:
+        ykotak1 -= 2
+        if ykotak1 <= 40:
+            yKondisi1 = False
+    glTranslated(xkotak1, ykotak1, 0)
+    glBegin(GL_POLYGON)
     glColor3d(255, 0, 0)
-    glVertex2f(0, 0)
+    for i in range(sisi):
+        theta = 2 * 3.1415926 * i / sisi
+        x = r * math.cos(theta)
+        y = r * math.sin(theta)
+        glVertex2f(x + cx, y + cy)
     glEnd()
     glPopMatrix()
 
 
-xsquare, ysquare = 100, 250
-xcondition, ycondition = False, False
-def square():
-    global xsquare, ysquare, xcondition, ycondition
+xkotak2, ykotak2 = 100, 250
+xkondisi2, ykondisi2 = False, False
+def kotak2(cx, cy, r, sisi):
+    global xkotak2, ykotak2, xkondisi2, ykondisi2
     glPushMatrix()
-    if xsquare >= 40 and xcondition == False:
-        xsquare += 2
-        if xsquare >= 970:
-            xcondition = True
+    if xkotak2 >= 40 and xkondisi2 == False:
+        xkotak2 += 4
+        if xkotak2 >= 960:
+            xkondisi2 = True
     
-    if xsquare <= 970 and xcondition == True:
-        xsquare -= 2
-        if xsquare <= 40:
-            xcondition = False
+    if xkotak2 <= 960 and xkondisi2 == True:
+        xkotak2 -= 4
+        if xkotak2 <= 40:
+            xkondisi2 = False
 
-    if ysquare >= 30 and ycondition == False:
-        ysquare += 2.5
-        if ysquare >= 460:
-            ycondition = True
+    if ykotak2 >= 40 and ykondisi2 == False:
+        ykotak2 += 2
+        if ykotak2 >= 460:
+            ykondisi2 = True
     
-    if ysquare <= 460 and ycondition == True:
-        ysquare -= 2.5
-        if ysquare <= 30:
-            ycondition = False
-    glTranslated(xsquare, ysquare, 0)
-    glPointSize(10)
-    glBegin(GL_POINTS)
+    if ykotak2 <= 460 and ykondisi2 == True:
+        ykotak2 -= 2
+        if ykotak2 <= 40:
+            ykondisi2 = False
+    glTranslated(xkotak2, ykotak2, 0)
+    glBegin(GL_POLYGON)
     glColor3d(255, 0, 0)
-    glVertex2f(0, 0)
+    for i in range(sisi):
+        theta = 2 * 3.1415926 * i / sisi
+        x = r * math.cos(theta)
+        y = r * math.sin(theta)
+        glVertex2f(x + cx, y + cy)
+    glEnd()
+    glPopMatrix()
+
+
+xkotak3, ykotak3 = 400, 250
+xkondisi3, ykondisi3 = False, False
+def kotak3(cx, cy, r ,sisi):
+    global xkotak3, ykotak3, xkondisi3, ykondisi3
+    glPushMatrix()
+    if xkotak3 >= 40 and xkondisi3 == False:
+        xkotak3 += 4
+        if xkotak3 >= 960:
+            xkondisi3 = True
+    
+    if xkotak3 <= 960 and xkondisi3 == True:
+        xkotak3 -= 4
+        if xkotak3 <= 40:
+            xkondisi3 = False
+
+    if ykotak3 >= 40 and ykondisi3 == False:
+        ykotak3 += 3
+        if ykotak3 >= 460:
+            ykondisi3 = True
+    
+    if ykotak3 <= 460 and ykondisi3 == True:
+        ykotak3 -= 3
+        if ykotak3 <= 40:
+            ykondisi3 = False
+    glTranslated(xkotak3, ykotak3, 0)
+    glBegin(GL_POLYGON)
+    glColor3d(255, 0, 0)
+    for i in range(sisi):
+        theta = 2 * 3.1415926 * i / sisi
+        x = r * math.cos(theta)
+        y = r * math.sin(theta)
+        glVertex2f(x + cx, y + cy)
     glEnd()
     glPopMatrix()
 
@@ -124,144 +196,208 @@ def tembok():
 
 
 def mainchar():
+    global coll
+    if coll == False:
+        glPushMatrix()
+        glTranslated(xmainchar, ymainchar, 0)
 
+        if xmainchar in range(int(xmonster1) - 45, int(xmonster1) + 50) and ymainchar in range(int(ymonster1) - 75, int(ymonster1) + 45):
+            print("kena")
+            coll = True
+        elif xmainchar in range(int(xmonster2) - 45, int(xmonster2) + 50) and ymainchar in range(int(ymonster2) - 75, int(ymonster2) + 45):
+            print("kena")
+            coll = True
+        elif xmainchar in range(int(xmonster3) - 45, int(xmonster3) + 50) and ymainchar in range(int(ymonster3) - 75, int(ymonster3) + 45):
+            print("kena")
+            coll = True
+        elif xmainchar in range(int(xkotak1)-30, int(xkotak1)+40) and ymainchar in range(int(ykotak1)-40, int(ykotak1)+50):
+            print("kena")
+            coll = True
+        elif xmainchar in range(int(xkotak2)-30, int(xkotak2)+40) and ymainchar in range(int(ykotak2)-40, int(ykotak2)+50):
+            print("kena")
+            coll = True
+        elif xmainchar in range(int(xkotak3)-30, int(xkotak3)+40) and ymainchar in range(int(ykotak3)-40, int(ykotak3)+50):
+            print("kena")
+            coll = True
+        if xmainchar in range(int(xdiamond)-40, int(xdiamond)+50) and ymainchar in range(int(ydiamond)-50, int(ydiamond)+60):
+            print("kena")
+
+        # Rambut ==========================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(77, 60, 56)
+        glVertex2f(-20, 0)
+        glVertex2f(-20, 23)
+        glVertex2f(-16, 23)
+        glVertex2f(-16, 30)
+        glVertex2f(16, 30)
+        glVertex2f(16, 23)
+        glVertex2f(20, 23)
+        glVertex2f(20, 10)
+        glVertex2f(0, 10)
+        glVertex2f(0, 0)
+        glEnd()
+
+        # Kepala ===========================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(255, 200, 170)
+        glVertex2f(-12, -4)
+        glVertex2f(16, -4)
+        glVertex2f(16, 14)
+        glVertex2f(-6, 14)
+        glVertex2f(-6, 6)
+        glVertex2f(-12, 6)
+        glEnd()
+
+        # Mata ==============================================================
+        glBegin(GL_POLYGON)
+        glColor3d(0, 0, 0)
+        glVertex2f(15, 2)
+        glVertex2f(15, 10)
+        glVertex2f(10, 10)
+        glVertex2f(10, 2)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3d(0, 0, 0)
+        glVertex2f(4, 2)
+        glVertex2f(4, 10)
+        glVertex2f(-1, 10)
+        glVertex2f(-1, 2)
+        glEnd()
+
+        # Badan ===============================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(200, 0, 0)
+        glVertex2f(-10, -4)
+        glVertex2f(10, -4)
+        glVertex2f(10, -16)
+        glVertex2f(-10, -16)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(200, 150, 35)
+        glVertex2f(-2, -16)
+        glVertex2f(-2, -10)
+        glVertex2f(4, -10)
+        glVertex2f(4, -16)
+        glEnd()
+
+        # Tangan ================================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(0, 0, 200)
+        glVertex2f(-12, -8)
+        glVertex2f(-6, -8)
+        glVertex2f(-6, -4)
+        glVertex2f(-12, -4)
+        glVertex2f(-12, -8)
+        glVertex2f(-16, -8)
+        glVertex2f(-16, -12)
+        glVertex2f(-12, -12)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(255, 200, 170)
+        glVertex2f(-20, -12)
+        glVertex2f(-12, -12)
+        glVertex2f(-12, -20)
+        glVertex2f(-20, -20)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(0, 0, 200)
+        glVertex2f(10, -8)
+        glVertex2f(14, -8)
+        glVertex2f(14, -12)
+        glVertex2f(10, -12)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(255, 200, 170)
+        glVertex2f(10, -12)
+        glVertex2f(18, -12)
+        glVertex2f(18, -20)
+        glVertex2f(10, -20)
+        glEnd()
+
+        # Kaki =====================================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(102, 51, 0)
+        glVertex2f(-10, -16)
+        glVertex2f(10, -16)
+        glVertex2f(10, -26)
+        glVertex2f(4, -26)
+        glVertex2f(4, -20)
+        glVertex2f(-4, -26)
+        glVertex2f(-10, -26)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(204, 102, 0)
+        glVertex2f(-10, -26)
+        glVertex2f(-4, -26)
+        glVertex2f(-4, -30)
+        glVertex2f(-10, -30)
+        glEnd()
+
+        glBegin(GL_POLYGON)
+        glColor3ub(204, 102, 0)
+        glVertex2f(4, -26)
+        glVertex2f(10, -26)
+        glVertex2f(10, -30)
+        glVertex2f(4, -30)
+        glEnd()
+        glPopMatrix()
+
+
+def diamond():
     glPushMatrix()
-    glTranslated(xmainchar, ymainchar, 0)
-
-    if xmainchar in range(int(xmonster1) - 45, int(xmonster1) + 50) and ymainchar in range(int(ymonster1) - 75, int(ymonster1) + 45):
-        print("kena")
-
-    # Rambut ==========================================================
-    glBegin(GL_POLYGON)
-    glColor3ub(77, 60, 56)
-    glVertex2f(-20, 0)
-    glVertex2f(-20, 23)
-    glVertex2f(-16, 23)
-    glVertex2f(-16, 30)
-    glVertex2f(16, 30)
-    glVertex2f(16, 23)
-    glVertex2f(20, 23)
-    glVertex2f(20, 10)
-    glVertex2f(0, 10)
-    glVertex2f(0, 0)
-    glEnd()
-
-    # Kepala ===========================================================
-    glBegin(GL_POLYGON)
-    glColor3ub(255, 200, 170)
-    glVertex2f(-12, -4)
-    glVertex2f(16, -4)
-    glVertex2f(16, 14)
-    glVertex2f(-6, 14)
-    glVertex2f(-6, 6)
-    glVertex2f(-12, 6)
-    glEnd()
-
-    # Mata ==============================================================
-    glBegin(GL_POLYGON)
-    glColor3d(0, 0, 0)
-    glVertex2f(15, 2)
-    glVertex2f(15, 10)
-    glVertex2f(10, 10)
-    glVertex2f(10, 2)
-    glEnd()
+    glTranslated(xdiamond, ydiamond, 0)
 
     glBegin(GL_POLYGON)
-    glColor3d(0, 0, 0)
-    glVertex2f(4, 2)
-    glVertex2f(4, 10)
-    glVertex2f(-1, 10)
-    glVertex2f(-1, 2)
+    glColor3ub(40, 255, 210)
+    glVertex2f(0, -20)
+    glVertex2f(-20, 5)
+    glVertex2f(-10, 20)
+    glVertex2f(10, 20)
+    glVertex2f(20, 5)
+    glVertex2f(20, 5)
     glEnd()
 
-    # Badan ===============================================================
-    glBegin(GL_POLYGON)
-    glColor3ub(200, 0, 0)
-    glVertex2f(-10, -4)
-    glVertex2f(10, -4)
-    glVertex2f(10, -16)
-    glVertex2f(-10, -16)
+    glLineWidth(3)
+    glBegin(GL_LINE_LOOP)
+    glColor3ub(40, 195, 210)
+    glVertex2f(0, -20)
+    glVertex2f(-20, 5)
+    glVertex2f(-10, 20)
+    glVertex2f(10, 20)
+    glVertex2f(20, 5)
+    glVertex2f(20, 5)
     glEnd()
 
-    glBegin(GL_POLYGON)
-    glColor3ub(200, 150, 35)
-    glVertex2f(-2, -16)
-    glVertex2f(-2, -10)
-    glVertex2f(4, -10)
-    glVertex2f(4, -16)
+    glLineWidth(3)
+    glBegin(GL_LINE_LOOP)
+    glColor3ub(40, 195, 210)
+    glVertex2f(-20, 5)
+    glVertex2f(-10, 20)
+    glVertex2f(-5, 13)
+    glVertex2f(5, 13)
+    glVertex2f(10, 20)
+    glVertex2f(20, 5)
+    glVertex2f(10, 3)
+    glVertex2f(5, 13)
+    glVertex2f(-5, 13)
+    glVertex2f(-10, 3)
+    glVertex2f(10, 3)
+    glVertex2f(0, -20)
+    glVertex2f(-10, 3)
     glEnd()
 
-    # Tangan ================================================================
-    glBegin(GL_POLYGON)
-    glColor3ub(0, 0, 200)
-    glVertex2f(-12, -8)
-    glVertex2f(-6, -8)
-    glVertex2f(-6, -4)
-    glVertex2f(-12, -4)
-    glVertex2f(-12, -8)
-    glVertex2f(-16, -8)
-    glVertex2f(-16, -12)
-    glVertex2f(-12, -12)
-    glEnd()
-
-    glBegin(GL_POLYGON)
-    glColor3ub(255, 200, 170)
-    glVertex2f(-20, -12)
-    glVertex2f(-12, -12)
-    glVertex2f(-12, -20)
-    glVertex2f(-20, -20)
-    glEnd()
-
-    glBegin(GL_POLYGON)
-    glColor3ub(0, 0, 200)
-    glVertex2f(10, -8)
-    glVertex2f(14, -8)
-    glVertex2f(14, -12)
-    glVertex2f(10, -12)
-    glEnd()
-
-    glBegin(GL_POLYGON)
-    glColor3ub(255, 200, 170)
-    glVertex2f(10, -12)
-    glVertex2f(18, -12)
-    glVertex2f(18, -20)
-    glVertex2f(10, -20)
-    glEnd()
-
-    # Kaki =====================================================================
-    glBegin(GL_POLYGON)
-    glColor3ub(102, 51, 0)
-    glVertex2f(-10, -16)
-    glVertex2f(10, -16)
-    glVertex2f(10, -26)
-    glVertex2f(4, -26)
-    glVertex2f(4, -20)
-    glVertex2f(-4, -26)
-    glVertex2f(-10, -26)
-    glEnd()
-
-    glBegin(GL_POLYGON)
-    glColor3ub(204, 102, 0)
-    glVertex2f(-10, -26)
-    glVertex2f(-4, -26)
-    glVertex2f(-4, -30)
-    glVertex2f(-10, -30)
-    glEnd()
-
-    glBegin(GL_POLYGON)
-    glColor3ub(204, 102, 0)
-    glVertex2f(4, -26)
-    glVertex2f(10, -26)
-    glVertex2f(10, -30)
-    glVertex2f(4, -30)
-    glEnd()
     glPopMatrix()
 
 
 def monster1():
 
     glPushMatrix()
-
     glTranslated(xmonster1, ymonster1, 0)
 
     # Kepala ====================================================================
@@ -275,6 +411,216 @@ def monster1():
 
     glBegin(GL_QUADS)
     glColor3ub(255, 140, 0)
+    glVertex2f(-15, -25)
+    glVertex2f(15, -25)
+    glVertex2f(15, -40)
+    glVertex2f(-15, -40)
+    glEnd()
+
+    # Garis Mata Kiri ===================================================================
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-11, 5)
+    glVertex2f(-11, -15)
+    glEnd()
+
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-20, -5)
+    glVertex2f(-2, -5)
+    glEnd()
+
+    # Garis Mata Kanan ===========================================================================
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(12, 5)
+    glVertex2f(12, -15)
+    glEnd()
+
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(2, -5)
+    glVertex2f(20, -5)
+    glEnd()
+
+    # Mata =============================================================================
+    def mata(cx, cy, r, sisi):
+        glBegin(GL_POLYGON)
+        glColor3f(0.5, 0.1, 0.1)
+        for i in range(sisi):
+            theta = 2 * 3.1415926 * i / sisi
+            x = r * math.cos(theta)
+            y = r * math.sin(theta)
+            glVertex2f(x + cx, y + cy)
+        glEnd()
+    mata(-11,-5,4.5,1000)
+    mata(11.5,-5,4.5,1000)
+
+    # Hidung ========================================================================
+    glBegin(GL_POLYGON)
+    glColor3d(0, 0, 0)
+    glVertex2f(-5, -14)
+    glVertex2f(5, -14)
+    glVertex2f(0, -23)
+    glEnd()
+
+    # Gigi ==============================================================================
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-9, -27)
+    glVertex2f(-9, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-3, -27)
+    glVertex2f(-3, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(3, -27)
+    glVertex2f(3, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(9, -27)
+    glVertex2f(9, -38)
+    glEnd()
+
+    glPopMatrix()
+
+
+def monster2():
+
+    glPushMatrix()
+    glTranslated(xmonster2, ymonster2, 0)
+
+    # Kepala ====================================================================
+    glBegin(GL_QUADS)
+    glColor3ub(255, 200, 0)
+    glVertex2f(-25, -25)
+    glVertex2f(-25, 10)
+    glVertex2f(25, 10)
+    glVertex2f(25, -25)
+    glEnd()
+
+    glBegin(GL_QUADS)
+    glColor3ub(80, 100, 0)
+    glVertex2f(-15, -25)
+    glVertex2f(15, -25)
+    glVertex2f(15, -40)
+    glVertex2f(-15, -40)
+    glEnd()
+
+    # Garis Mata Kiri ===================================================================
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-11, 5)
+    glVertex2f(-11, -15)
+    glEnd()
+
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-20, -5)
+    glVertex2f(-2, -5)
+    glEnd()
+
+    # Garis Mata Kanan ===========================================================================
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(12, 5)
+    glVertex2f(12, -15)
+    glEnd()
+
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(2, -5)
+    glVertex2f(20, -5)
+    glEnd()
+
+    # Mata =============================================================================
+    def mata(cx, cy, r, sisi):
+        glBegin(GL_POLYGON)
+        glColor3f(0.5, 0.1, 0.1)
+        for i in range(sisi):
+            theta = 2 * 3.1415926 * i / sisi
+            x = r * math.cos(theta)
+            y = r * math.sin(theta)
+            glVertex2f(x + cx, y + cy)
+        glEnd()
+    mata(-11,-5,4.5,1000)
+    mata(11.5,-5,4.5,1000)
+
+    # Hidung ========================================================================
+    glBegin(GL_POLYGON)
+    glColor3d(0, 0, 0)
+    glVertex2f(-5, -14)
+    glVertex2f(5, -14)
+    glVertex2f(0, -23)
+    glEnd()
+
+    # Gigi ==============================================================================
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-9, -27)
+    glVertex2f(-9, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(-3, -27)
+    glVertex2f(-3, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(3, -27)
+    glVertex2f(3, -38)
+    glEnd()
+
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glColor3d(0, 0, 0)
+    glVertex2f(9, -27)
+    glVertex2f(9, -38)
+    glEnd()
+
+    glPopMatrix()
+
+
+def monster3():
+
+    glPushMatrix()
+    glTranslated(xmonster3, ymonster3, 0)
+
+    # Kepala ====================================================================
+    glBegin(GL_QUADS)
+    glColor3ub(255, 200, 0)
+    glVertex2f(-25, -25)
+    glVertex2f(-25, 10)
+    glVertex2f(25, 10)
+    glVertex2f(25, -25)
+    glEnd()
+
+    glBegin(GL_QUADS)
+    glColor3ub(165, 0, 90)
     glVertex2f(-15, -25)
     glVertex2f(15, -25)
     glVertex2f(15, -40)
@@ -412,6 +758,30 @@ def objek4():
     glPopMatrix()
 
 
+def objek5():
+    glPushMatrix()
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,256)
+    glVertex2d(800, 30)
+    glVertex2d(800, 400)
+    glVertex2d(830, 400)
+    glVertex2d(830, 30)
+    glEnd()
+    glPopMatrix()
+
+
+def objek6():
+    glPushMatrix()
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,256)
+    glVertex2d(880, 470)
+    glVertex2d(880, 100)
+    glVertex2d(910, 100)
+    glVertex2d(910, 470)
+    glEnd()
+    glPopMatrix()
+    
+
 def mySpecialKeyboard1(key, x, y):
     global xmainchar, ymainchar, xmonster1, ymonster1
 
@@ -423,6 +793,10 @@ def mySpecialKeyboard1(key, x, y):
         elif xmainchar == 330 and ymainchar < 430:
             xmainchar+=0
         elif xmainchar == 430 and ymainchar > 70:
+            xmainchar+=0
+        elif xmainchar == 780 and ymainchar < 430:
+            xmainchar+=0
+        elif xmainchar == 860 and ymainchar > 70:
             xmainchar+=0
         elif xmainchar >= 950:
             xmainchar += 0
@@ -438,6 +812,10 @@ def mySpecialKeyboard1(key, x, y):
             xmainchar -= 0
         elif xmainchar == 520 and ymainchar > 70:
             xmainchar -= 0
+        elif xmainchar == 850 and ymainchar < 430:
+            xmainchar -= 0
+        elif xmainchar == 930 and ymainchar > 70:
+            xmainchar -= 0
         elif xmainchar <= 50:
             xmainchar -= 0
         else:
@@ -447,6 +825,10 @@ def mySpecialKeyboard1(key, x, y):
         if ymainchar == 70 and 230 < xmainchar < 300:
             ymainchar+=0
         elif ymainchar == 70 and 430 < xmainchar < 520:
+            ymainchar+=0
+        elif ymainchar == 70 and 860 < xmainchar < 930:
+            ymainchar+=0
+        elif ymainchar == 390 and 900 < xmainchar < 980:
             ymainchar+=0
         elif ymainchar >= 440:
             ymainchar+= 0
@@ -458,13 +840,14 @@ def mySpecialKeyboard1(key, x, y):
             ymainchar-=0
         elif ymainchar == 430 and 330 < xmainchar < 400:
             ymainchar-=0
+        elif ymainchar == 430 and 780 < xmainchar < 850:
+            ymainchar-=0
         elif ymainchar <= 60:
             ymainchar-= 0
         else:
             ymainchar-=10
         
     print(f"{xmainchar}, {ymainchar}")
-
 
    
 def showScreen():
@@ -482,11 +865,19 @@ def showScreen():
     objek2()
     objek3()
     objek4()
+    objek5()
+    objek6()
+    diamond()
     monster1()
-    gerak()
+    gerak1()
+    monster2()
+    gerak2()
+    monster3()
+    gerak3()
     mainchar()
-    kotak()
-    square()
+    kotak1(0, 0, 10, 20)
+    kotak2(0, 0, 10, 20)
+    kotak3(0, 0, 10, 20)
     glutSwapBuffers()
 
 glutInit()
