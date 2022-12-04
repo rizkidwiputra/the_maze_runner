@@ -11,7 +11,18 @@ xdiamond, ydiamond = 940, 440
 arah_monster1 = False
 arah_monster2 = False
 arah_monster3 = False
+xkotak1, ykotak1 = 60, 350
+xKondisi1, yKondisi1 = False, False
+xkotak2, ykotak2 = 100, 250
+xkondisi2, ykondisi2 = False, False
+xkotak3, ykotak3 = 400, 250
+xkondisi3, ykondisi3 = False, False
 coll = False
+play = True
+lose = False
+win = False
+
+# Gerak Monster 1 =====================================================================
 
 def gerak1():
     global ymonster1, xmonster1, arah_monster1
@@ -26,6 +37,7 @@ def gerak1():
             arah_monster1 = False
 
 
+# Gerak Monster 2 =====================================================================
 def gerak2():
     global ymonster2, xmonster2, arah_monster2
 
@@ -39,6 +51,7 @@ def gerak2():
             arah_monster2 = False
 
 
+# Gerak Monster 3 =====================================================================
 def gerak3():
     global ymonster3, xmonster3, arah_monster3
 
@@ -52,8 +65,7 @@ def gerak3():
             arah_monster3 = False
 
 
-xkotak1, ykotak1 = 60, 350
-xKondisi1, yKondisi1 = False, False
+# Laser 1 =============================================================================
 def kotak1(cx, cy, r, sisi):
     global xkotak1, ykotak1, xKondisi1, yKondisi1
     glPushMatrix()
@@ -88,8 +100,7 @@ def kotak1(cx, cy, r, sisi):
     glPopMatrix()
 
 
-xkotak2, ykotak2 = 100, 250
-xkondisi2, ykondisi2 = False, False
+# Laser 2 =============================================================================
 def kotak2(cx, cy, r, sisi):
     global xkotak2, ykotak2, xkondisi2, ykondisi2
     glPushMatrix()
@@ -124,8 +135,7 @@ def kotak2(cx, cy, r, sisi):
     glPopMatrix()
 
 
-xkotak3, ykotak3 = 400, 250
-xkondisi3, ykondisi3 = False, False
+# Laser 3 =============================================================================
 def kotak3(cx, cy, r ,sisi):
     global xkotak3, ykotak3, xkondisi3, ykondisi3
     glPushMatrix()
@@ -160,10 +170,10 @@ def kotak3(cx, cy, r ,sisi):
     glPopMatrix()
 
 
+# Pembatas ============================================================================
 def tembok():
-
     glBegin(GL_POLYGON)
-    glColor3d(0, 0, 256)
+    glColor3ub(0, 0, 153)
     glVertex2f(0, 0)
     glVertex2f(0, 500)
     glVertex2f(30, 500)
@@ -171,7 +181,7 @@ def tembok():
     glEnd()
 
     glBegin(GL_POLYGON)
-    glColor3d(0, 0, 256)
+    glColor3ub(0, 0, 153)
     glVertex2f(0, 500)
     glVertex2f(1000, 500)
     glVertex2f(1000, 470)
@@ -179,7 +189,7 @@ def tembok():
     glEnd()
 
     glBegin(GL_POLYGON)
-    glColor3d(0, 0, 256)
+    glColor3ub(0, 0, 153)
     glVertex2f(1000, 500)
     glVertex2f(1000, 0)
     glVertex2f(970, 0)
@@ -187,7 +197,7 @@ def tembok():
     glEnd()
 
     glBegin(GL_POLYGON)
-    glColor3d(0, 0, 256)
+    glColor3ub(0, 0, 153)
     glVertex2f(1000, 0)
     glVertex2f(0, 0)
     glVertex2f(0, 30)
@@ -195,32 +205,47 @@ def tembok():
     glEnd()
 
 
+# Main Character ======================================================================
 def mainchar():
-    global coll
-    if coll == False:
+    global coll, play, lose, win
+    if coll == False and play == True and lose == False:
         glPushMatrix()
         glTranslated(xmainchar, ymainchar, 0)
 
         if xmainchar in range(int(xmonster1) - 45, int(xmonster1) + 50) and ymainchar in range(int(ymonster1) - 75, int(ymonster1) + 45):
             print("kena")
             coll = True
+            lose = True
+            play = False
         elif xmainchar in range(int(xmonster2) - 45, int(xmonster2) + 50) and ymainchar in range(int(ymonster2) - 75, int(ymonster2) + 45):
             print("kena")
             coll = True
+            lose = True
+            play = False
         elif xmainchar in range(int(xmonster3) - 45, int(xmonster3) + 50) and ymainchar in range(int(ymonster3) - 75, int(ymonster3) + 45):
             print("kena")
             coll = True
+            lose = True
+            play = False
         elif xmainchar in range(int(xkotak1)-30, int(xkotak1)+40) and ymainchar in range(int(ykotak1)-40, int(ykotak1)+50):
             print("kena")
             coll = True
+            lose = True
+            play = False
         elif xmainchar in range(int(xkotak2)-30, int(xkotak2)+40) and ymainchar in range(int(ykotak2)-40, int(ykotak2)+50):
             print("kena")
             coll = True
+            lose = True
+            play = False
         elif xmainchar in range(int(xkotak3)-30, int(xkotak3)+40) and ymainchar in range(int(ykotak3)-40, int(ykotak3)+50):
             print("kena")
             coll = True
+            lose = True
+            play = False
         if xmainchar in range(int(xdiamond)-40, int(xdiamond)+50) and ymainchar in range(int(ydiamond)-50, int(ydiamond)+60):
             print("kena")
+            win = True
+            play = False
 
         # Rambut ==========================================================
         glBegin(GL_POLYGON)
@@ -349,6 +374,7 @@ def mainchar():
         glPopMatrix()
 
 
+# Diamond =============================================================================
 def diamond():
     glPushMatrix()
     glTranslated(xdiamond, ydiamond, 0)
@@ -395,6 +421,7 @@ def diamond():
     glPopMatrix()
 
 
+# Monster 1 ===========================================================================
 def monster1():
 
     glPushMatrix()
@@ -500,6 +527,7 @@ def monster1():
     glPopMatrix()
 
 
+# Monster 2 ===========================================================================
 def monster2():
 
     glPushMatrix()
@@ -605,6 +633,7 @@ def monster2():
     glPopMatrix()
 
 
+# Monster 3 ===========================================================================
 def monster3():
 
     glPushMatrix()
@@ -713,7 +742,7 @@ def monster3():
 def objek1():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(120, 30)
     glVertex2d(120, 400)
     glVertex2d(180, 400)
@@ -725,7 +754,7 @@ def objek1():
 def objek2():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(250, 470)
     glVertex2d(250, 100)
     glVertex2d(280, 100)
@@ -737,7 +766,7 @@ def objek2():
 def objek3():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(350, 30)
     glVertex2d(350, 400)
     glVertex2d(380, 400)
@@ -749,7 +778,7 @@ def objek3():
 def objek4():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(450, 470)
     glVertex2d(450, 100)
     glVertex2d(500, 100)
@@ -761,7 +790,7 @@ def objek4():
 def objek5():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(800, 30)
     glVertex2d(800, 400)
     glVertex2d(830, 400)
@@ -773,7 +802,7 @@ def objek5():
 def objek6():
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3d(0,0,256)
+    glColor3ub(0, 0, 153)
     glVertex2d(880, 470)
     glVertex2d(880, 100)
     glVertex2d(910, 100)
@@ -782,9 +811,459 @@ def objek6():
     glPopMatrix()
     
 
-def mySpecialKeyboard1(key, x, y):
-    global xmainchar, ymainchar, xmonster1, ymonster1
+def game_over():
+    global play, lose
+    if play == False and lose == True:
+        glPushMatrix()
+        glTranslated(500, 250, 0)
+        
+        # Kotak Dasar ==============================================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(255, 255, 255)
+        glVertex2f(-300, -150)
+        glVertex2f(-300, 150)
+        glVertex2f(300, 150)
+        glVertex2f(300, -150)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(64, 64, 64)
+        glVertex2f(-300, 100)
+        glVertex2f(-300, 150)
+        glVertex2f(300, 150)
+        glVertex2f(300, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(190, 0, 0)
+        glVertex2f(150, 100)
+        glVertex2f(200, 150)
+        glVertex2f(250, 150)
+        glVertex2f(200, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(0, 0, 204)
+        glVertex2f(200, 100)
+        glVertex2f(250, 150)
+        glVertex2f(300, 150)
+        glVertex2f(250, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(190, 0, 0)
+        glVertex2f(250, 100)
+        glVertex2f(300, 150)
+        glVertex2f(300, 100)
+        glEnd()
+        
+        # Tulisan ====================================================================================
+        # G
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-160, 45)
+        glVertex2f(-185, 45)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-185, 45)
+        glVertex2f(-200, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-200, 20)
+        glVertex2f(-190, 5)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-190, 5)
+        glVertex2f(-165, 5)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-165, 5)
+        glVertex2f(-165, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-165, 20)
+        glVertex2f(-180, 20)
+        glEnd()
 
+        # A
+        glLineWidth(10)
+        glBegin(GL_LINE_LOOP)
+        glColor3d(255, 0, 0)
+        glVertex2f(-142, 20)
+        glVertex2f(-130, 50)
+        glVertex2f(-118, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-150, 0)
+        glVertex2f(-142, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-110, 0)
+        glVertex2f(-118, 20)
+        glEnd()
+
+        # M
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-100, 0)
+        glVertex2f(-100, 50)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-100, 50)
+        glVertex2f(-80, 25)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-80, 25)
+        glVertex2f(-60, 50)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-60, 50)
+        glVertex2f(-60, 0)
+        glEnd()
+
+        # E
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-40, 0)
+        glVertex2f(-40, 50)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-40, 45)
+        glVertex2f(-10, 45)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-40, 25)
+        glVertex2f(-10, 25)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-40, 5)
+        glVertex2f(-10, 5)
+        glEnd()
+
+        # O
+        glLineWidth(10)
+        glBegin(GL_LINE_LOOP)
+        glColor3d(255, 0, 0)
+        glVertex2f(25, 25)
+        glVertex2f(45, 50)
+        glVertex2f(65, 25)
+        glVertex2f(45, 0)
+        glEnd()
+
+        # V
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(70, 50)
+        glVertex2f(90, 0)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(90, 0)
+        glVertex2f(110, 50)
+        glEnd()
+
+        # E
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(120, 0)
+        glVertex2f(120, 50)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(120, 45)
+        glVertex2f(150, 45)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(120, 25)
+        glVertex2f(150, 25)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(120, 5)
+        glVertex2f(150, 5)
+        glEnd()
+
+        # R
+        glLineWidth(8)
+        glBegin(GL_LINE_LOOP)
+        glColor3d(255, 0, 0)
+        glVertex2f(160, 30)
+        glVertex2f(160, 45)
+        glVertex2f(180, 45)
+        glVertex2f(200, 40)
+        glVertex2f(180, 30)
+        glEnd()
+        glLineWidth(8)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(160, 0)
+        glVertex2f(160, 30)
+        glEnd()
+        glLineWidth(8)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(160, 30)
+        glVertex2f(200, 0)
+        glEnd()
+
+        # Button ==================================================================================
+        glBegin(GL_POLYGON)
+        glColor3d(255, 0, 0)
+        glVertex2f(-100, -50)
+        glVertex2f(100, -50)
+        glVertex2f(100, -100)
+        glVertex2f(-100, -100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3d(255, 255, 255)
+        glVertex2f(-20, -90)
+        glVertex2f(-20, -60)
+        glVertex2f(20, -75)
+        glEnd()
+        glPopMatrix()
+
+
+def winner():
+    global play, win
+    if play == False and win == True:
+        glPushMatrix()
+        glTranslated(500, 250, 0)
+        
+        # Kotak Dasar ==============================================================================
+        glBegin(GL_POLYGON)
+        glColor3ub(255, 255, 255)
+        glVertex2f(-300, -150)
+        glVertex2f(-300, 150)
+        glVertex2f(300, 150)
+        glVertex2f(300, -150)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(64, 64, 64)
+        glVertex2f(-300, 100)
+        glVertex2f(-300, 150)
+        glVertex2f(300, 150)
+        glVertex2f(300, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(0, 0, 204)
+        glVertex2f(150, 100)
+        glVertex2f(200, 150)
+        glVertex2f(250, 150)
+        glVertex2f(200, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(190, 0, 0)
+        glVertex2f(200, 100)
+        glVertex2f(250, 150)
+        glVertex2f(300, 150)
+        glVertex2f(250, 100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3ub(0, 0, 204)
+        glVertex2f(250, 100)
+        glVertex2f(300, 150)
+        glVertex2f(300, 100)
+        glEnd()
+        
+        # Tulisan ====================================================================================
+        # W
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-130, 0)
+        glVertex2f(-130, 40)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-130, 0)
+        glVertex2f(-110, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-110, 20)
+        glVertex2f(-90, 0)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-90, 0)
+        glVertex2f(-90, 40)
+        glEnd()
+
+        # I
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-70, 0)
+        glVertex2f(-70, 40)
+        glEnd()
+
+        # N
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-50, 40)
+        glVertex2f(-50, 0)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-50, 0)
+        glVertex2f(-10, 40)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(-10, 40)
+        glVertex2f(-10, 0)
+        glEnd()
+
+        # N
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(10, 0)
+        glVertex2f(10, 40)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(10, 40)
+        glVertex2f(50, 0)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(50, 0)
+        glVertex2f(50, 40)
+        glEnd()
+        
+        # E
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(65, 0)
+        glVertex2f(65, 40)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(65, 35)
+        glVertex2f(90, 35)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(65, 20)
+        glVertex2f(90, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(65, 5)
+        glVertex2f(90, 5)
+        glEnd()
+        
+        # R
+        glLineWidth(10)
+        glBegin(GL_LINE_LOOP)
+        glColor3d(255, 0, 0)
+        glVertex2f(105, 20)
+        glVertex2f(105, 40)
+        glVertex2f(125, 35)
+        glVertex2f(135, 30)
+        glVertex2f(125, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(105, 0)
+        glVertex2f(105, 20)
+        glEnd()
+        glLineWidth(10)
+        glBegin(GL_LINES)
+        glColor3d(255, 0, 0)
+        glVertex2f(105, 20)
+        glVertex2f(135, 0)
+        glEnd()
+
+        # Button ==================================================================================
+        glBegin(GL_POLYGON)
+        glColor3d(255, 0, 0)
+        glVertex2f(-100, -50)
+        glVertex2f(100, -50)
+        glVertex2f(100, -100)
+        glVertex2f(-100, -100)
+        glEnd()
+        
+        glBegin(GL_POLYGON)
+        glColor3d(255, 255, 255)
+        glVertex2f(-20, -90)
+        glVertex2f(-20, -60)
+        glVertex2f(20, -75)
+        glEnd()
+        glPopMatrix()
+
+
+def myMouse(button, state, x, y):
+    global coll, play, lose, win, xmainchar, ymainchar
+    if play == False:
+        if lose == True or win == True:
+            if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
+                # print(f"{x}, {y}")
+                if ((400 <= x <= 600) and (300 <= y <= 350)):
+                    coll = False
+                    lose = False
+                    win = False
+                    play = True
+                    xmainchar, ymainchar = 50, 60
+                    
+
+def mySpecialKeyboard(key, x, y):
+    global xmainchar, ymainchar, xmonster1, ymonster1
     if key == GLUT_KEY_RIGHT:
         if xmainchar == 100 and ymainchar < 430:
             xmainchar+=0
@@ -847,9 +1326,8 @@ def mySpecialKeyboard1(key, x, y):
         else:
             ymainchar-=10
         
-    print(f"{xmainchar}, {ymainchar}")
+    # print(f"{xmainchar}, {ymainchar}")
 
-   
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(0,0,0,1)
@@ -878,14 +1356,19 @@ def showScreen():
     kotak1(0, 0, 10, 20)
     kotak2(0, 0, 10, 20)
     kotak3(0, 0, 10, 20)
+    game_over()
+    winner()
     glutSwapBuffers()
 
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
 glutInitWindowSize(1000, 500)
 glutInitWindowPosition(0, 0)
-glutCreateWindow("OpenGL Coding Practice")
+glutCreateWindow("===>> Maze Runner <<===")
 glutDisplayFunc(showScreen)
-glutSpecialFunc(mySpecialKeyboard1)
 glutIdleFunc(showScreen)
+glutSpecialFunc(mySpecialKeyboard)
+glutMouseFunc(myMouse)
 glutMainLoop()
+
+
