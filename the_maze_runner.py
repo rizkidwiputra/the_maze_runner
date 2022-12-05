@@ -11,7 +11,7 @@ xdiamond, ydiamond = 940, 440
 arah_monster1 = False
 arah_monster2 = False
 arah_monster3 = False
-xkotak1, ykotak1 = 60, 350
+xkotak1, ykotak1 = 60, 250
 xKondisi1, yKondisi1 = False, False
 xkotak2, ykotak2 = 100, 250
 xkondisi2, ykondisi2 = False, False
@@ -22,17 +22,18 @@ play = True
 lose = False
 win = False
 
+
 # Gerak Monster 1 =====================================================================
 
 def gerak1():
     global ymonster1, xmonster1, arah_monster1
 
     if ymonster1 <= 460 and arah_monster1 == False:
-        ymonster1 -= 2.5
+        ymonster1 -= 2
         if ymonster1 <= 70:
             arah_monster1 =True
     if ymonster1 >= 70 and arah_monster1 == True:
-        ymonster1 += 2.5
+        ymonster1 += 2
         if ymonster1 >= 460:
             arah_monster1 = False
 
@@ -42,11 +43,11 @@ def gerak2():
     global ymonster2, xmonster2, arah_monster2
 
     if ymonster2 <= 460 and arah_monster2 == False:
-        ymonster2 -= 10
+        ymonster2 -= 4
         if ymonster2 <= 70:
             arah_monster2 =True
-    if ymonster2 >= 70 and arah_monster2 == True:
-        ymonster2 += 10
+    if ymonster2 >= 68 and arah_monster2 == True:
+        ymonster2 += 4
         if ymonster2 >= 460:
             arah_monster2 = False
 
@@ -56,11 +57,11 @@ def gerak3():
     global ymonster3, xmonster3, arah_monster3
 
     if ymonster3 <= 460 and arah_monster3 == False:
-        ymonster3 -= 5
+        ymonster3 -= 2.5
         if ymonster3 <= 70:
             arah_monster3 =True
     if ymonster3 >= 70 and arah_monster3 == True:
-        ymonster3 += 5
+        ymonster3 += 2.5
         if ymonster3 >= 460:
             arah_monster3 = False
 
@@ -70,12 +71,12 @@ def kotak1(cx, cy, r, sisi):
     global xkotak1, ykotak1, xKondisi1, yKondisi1
     glPushMatrix()
     if xkotak1 >= 40 and xKondisi1 == False:
-        xkotak1 += 2.5
+        xkotak1 += 2
         if xkotak1 >= 960:
             xKondisi1 = True
     
     if xkotak1 <= 960 and xKondisi1 == True:
-        xkotak1 -= 2.5
+        xkotak1 -= 2
         if xkotak1 <= 40:
             xKondisi1 = False
 
@@ -105,12 +106,12 @@ def kotak2(cx, cy, r, sisi):
     global xkotak2, ykotak2, xkondisi2, ykondisi2
     glPushMatrix()
     if xkotak2 >= 40 and xkondisi2 == False:
-        xkotak2 += 4
+        xkotak2 += 1
         if xkotak2 >= 960:
             xkondisi2 = True
     
     if xkotak2 <= 960 and xkondisi2 == True:
-        xkotak2 -= 4
+        xkotak2 -= 1
         if xkotak2 <= 40:
             xkondisi2 = False
 
@@ -140,22 +141,22 @@ def kotak3(cx, cy, r ,sisi):
     global xkotak3, ykotak3, xkondisi3, ykondisi3
     glPushMatrix()
     if xkotak3 >= 40 and xkondisi3 == False:
-        xkotak3 += 4
+        xkotak3 += 2
         if xkotak3 >= 960:
             xkondisi3 = True
     
     if xkotak3 <= 960 and xkondisi3 == True:
-        xkotak3 -= 4
+        xkotak3 -= 2
         if xkotak3 <= 40:
             xkondisi3 = False
 
     if ykotak3 >= 40 and ykondisi3 == False:
-        ykotak3 += 3
+        ykotak3 += 1
         if ykotak3 >= 460:
             ykondisi3 = True
     
     if ykotak3 <= 460 and ykondisi3 == True:
-        ykotak3 -= 3
+        ykotak3 -= 1
         if ykotak3 <= 40:
             ykondisi3 = False
     glTranslated(xkotak3, ykotak3, 0)
@@ -1249,7 +1250,8 @@ def winner():
 
 
 def myMouse(button, state, x, y):
-    global coll, play, lose, win, xmainchar, ymainchar
+    global coll, play, lose, win
+    global xmainchar, ymainchar, xmonster1, ymonster1, xmonster2, ymonster2, xmonster3, ymonster3, xkotak1, ykotak1, xkotak3, ykotak3, xkotak2, ykotak2
     if play == False:
         if lose == True or win == True:
             if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
@@ -1260,6 +1262,12 @@ def myMouse(button, state, x, y):
                     win = False
                     play = True
                     xmainchar, ymainchar = 50, 60
+                    xmonster1, ymonster1 = 555, 440
+                    xmonster2, ymonster2 = 635, 440
+                    xmonster3, ymonster3 = 715, 440
+                    xkotak1, ykotak1 = 60, 250
+                    xkotak3, ykotak3 = 400, 250
+                    xkotak2, ykotak2 = 100, 250
                     
 
 def mySpecialKeyboard(key, x, y):
