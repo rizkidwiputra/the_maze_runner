@@ -47,7 +47,7 @@ def gerak2():
         if ymonster2 <= 70:
             arah_monster2 =True
     if ymonster2 >= 68 and arah_monster2 == True:
-        ymonster2 += 4
+        ymonster2 += 2
         if ymonster2 >= 460:
             arah_monster2 = False
 
@@ -76,7 +76,7 @@ def kotak1(cx, cy, r, sisi):
             xKondisi1 = True
     
     if xkotak1 <= 960 and xKondisi1 == True:
-        xkotak1 -= 2
+        xkotak1 -= 1
         if xkotak1 <= 40:
             xKondisi1 = False
 
@@ -86,7 +86,7 @@ def kotak1(cx, cy, r, sisi):
             yKondisi1 = True
     
     if ykotak1 <= 460 and yKondisi1 == True:
-        ykotak1 -= 2
+        ykotak1 -= 1
         if ykotak1 <= 40:
             yKondisi1 = False
     glTranslated(xkotak1, ykotak1, 0)
@@ -246,7 +246,6 @@ def mainchar():
         if xmainchar in range(int(xdiamond)-40, int(xdiamond)+50) and ymainchar in range(int(ydiamond)-50, int(ydiamond)+60):
             print("kena")
             win = True
-            play = False
 
         # Rambut ==========================================================
         glBegin(GL_POLYGON)
@@ -1063,7 +1062,7 @@ def game_over():
 
 def winner():
     global play, win
-    if play == False and win == True:
+    if win == True:
         glPushMatrix()
         glTranslated(500, 250, 0)
         
