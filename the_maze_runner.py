@@ -24,7 +24,6 @@ win = False
 
 
 # Gerak Monster 1 =====================================================================
-
 def gerak1():
     global ymonster1, xmonster1, arah_monster1
 
@@ -214,37 +213,30 @@ def mainchar():
         glTranslated(xmainchar, ymainchar, 0)
 
         if xmainchar in range(int(xmonster1) - 45, int(xmonster1) + 50) and ymainchar in range(int(ymonster1) - 75, int(ymonster1) + 45):
-            print("kena")
             coll = True
             lose = True
             play = False
         elif xmainchar in range(int(xmonster2) - 45, int(xmonster2) + 50) and ymainchar in range(int(ymonster2) - 75, int(ymonster2) + 45):
-            print("kena")
             coll = True
             lose = True
             play = False
         elif xmainchar in range(int(xmonster3) - 45, int(xmonster3) + 50) and ymainchar in range(int(ymonster3) - 75, int(ymonster3) + 45):
-            print("kena")
             coll = True
             lose = True
             play = False
         elif xmainchar in range(int(xkotak1)-30, int(xkotak1)+40) and ymainchar in range(int(ykotak1)-40, int(ykotak1)+50):
-            print("kena")
             coll = True
             lose = True
             play = False
         elif xmainchar in range(int(xkotak2)-30, int(xkotak2)+40) and ymainchar in range(int(ykotak2)-40, int(ykotak2)+50):
-            print("kena")
             coll = True
             lose = True
             play = False
         elif xmainchar in range(int(xkotak3)-30, int(xkotak3)+40) and ymainchar in range(int(ykotak3)-40, int(ykotak3)+50):
-            print("kena")
             coll = True
             lose = True
             play = False
         if xmainchar in range(int(xdiamond)-40, int(xdiamond)+50) and ymainchar in range(int(ydiamond)-50, int(ydiamond)+60):
-            print("kena")
             win = True
 
         # Rambut ==========================================================
@@ -1250,11 +1242,11 @@ def winner():
 
 def myMouse(button, state, x, y):
     global coll, play, lose, win
-    global xmainchar, ymainchar, xmonster1, ymonster1, xmonster2, ymonster2, xmonster3, ymonster3, xkotak1, ykotak1, xkotak3, ykotak3, xkotak2, ykotak2
+    global xmainchar, ymainchar, xmonster1, ymonster1, xmonster2, ymonster2, xmonster3, ymonster3
+    global xkotak1, ykotak1, xkotak3, ykotak3, xkotak2, ykotak2
     if play == False:
         if lose == True or win == True:
             if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
-                # print(f"{x}, {y}")
                 if ((400 <= x <= 600) and (300 <= y <= 350)):
                     coll = False
                     lose = False
@@ -1333,7 +1325,6 @@ def mySpecialKeyboard(key, x, y):
         else:
             ymainchar-=10
         
-    # print(f"{xmainchar}, {ymainchar}")
 
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -1377,5 +1368,3 @@ glutIdleFunc(showScreen)
 glutSpecialFunc(mySpecialKeyboard)
 glutMouseFunc(myMouse)
 glutMainLoop()
-
-
